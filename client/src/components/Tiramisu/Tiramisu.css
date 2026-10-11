@@ -1,0 +1,77 @@
+.tira {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(90% 70% at 50% 35%, #241b2e 0%, var(--c-night-2) 60%, var(--c-night) 100%);
+}
+.tira__spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(40% 34% at 50% 42%, rgba(255, 198, 109, 0.18), transparent 70%);
+}
+.tira__back {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-5));
+  z-index: 3;
+}
+.tira__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  width: min(92vw, 440px);
+}
+.tira__dessert {
+  position: relative;
+  width: 200px;
+  margin: 0 auto var(--sp-4);
+}
+.tira__dessert svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.5));
+}
+.tira__title {
+  font-size: var(--fs-2xl);
+  color: var(--c-cream);
+  margin-bottom: var(--sp-5);
+}
+.tira__recipe {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+.tira__recipe li {
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  color: var(--c-cream-dim);
+}
+.tira__recipe li:last-child {
+  color: var(--c-gold);
+  font-weight: 500;
+}
+.tira__reveal p {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--c-cream);
+  margin-bottom: var(--sp-5);
+}
+.tira__sparkles span {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 7px;
+  height: 7px;
+  background: var(--c-amber);
+  border-radius: 50%;
+  box-shadow: var(--glow-amber);
+  animation: sparkle 2.4s ease-out infinite;
+  animation-delay: calc(var(--i) * 0.18s);
+}

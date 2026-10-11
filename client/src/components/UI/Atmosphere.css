@@ -1,0 +1,58 @@
+.starfield,
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--c-cream);
+  opacity: calc(var(--bright) * 0.5);
+  box-shadow: 0 0 4px rgba(247, 240, 229, 0.8);
+  animation: twinkle var(--dur) ease-in-out var(--delay) infinite;
+}
+.star--static {
+  animation: none;
+  opacity: calc(var(--bright) * 0.5);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: calc(var(--bright) * 0.25);
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: var(--bright);
+    transform: scale(1.15);
+  }
+}
+
+.mote {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-amber) 0%, rgba(255, 198, 109, 0) 70%);
+  opacity: 0;
+  animation: float-up var(--dur) linear var(--delay) infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(var(--drift), -102vh) scale(1);
+    opacity: 0;
+  }
+}

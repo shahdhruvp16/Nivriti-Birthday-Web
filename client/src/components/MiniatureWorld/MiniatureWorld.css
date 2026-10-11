@@ -1,0 +1,368 @@
+.world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 6%, #16223f 0%, var(--c-night-2) 52%, var(--c-night) 100%);
+}
+.world__ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(58% 44% at 55% 58%, rgba(255, 198, 109, 0.1), transparent 70%);
+}
+
+/* ---- terminal card (top-left) ---- */
+.world__terminal {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-4));
+  z-index: var(--z-ui);
+  padding: 0.7rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+  color: var(--c-blue-soft);
+  background: rgba(10, 16, 30, 0.6);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  backdrop-filter: blur(8px);
+}
+.world__heart,
+.world__sunflower {
+  color: var(--c-gold);
+}
+
+/* ---- script title (top-right) ---- */
+.world__title {
+  position: absolute;
+  right: var(--sp-5);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-4));
+  z-index: var(--z-ui);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.world__title-script {
+  font-family: var(--font-script);
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 0.9;
+  color: var(--c-cream);
+  text-shadow: 0 0 24px rgba(232, 184, 90, 0.4);
+}
+.world__title-sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 1.6vw, 0.8rem);
+  letter-spacing: 0.28em;
+  color: var(--c-gold-soft);
+  margin-top: 4px;
+}
+
+/* ---- diorama ---- */
+.world__diorama-wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  z-index: var(--z-scene);
+}
+.world__diorama {
+  position: relative;
+  width: min(100%, 86vh);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-lg);
+  overflow: visible;
+}
+.world__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+  user-select: none;
+}
+.world__svgroom {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: radial-gradient(100% 80% at 50% 20%, #1a2644, #0c1428);
+  box-shadow: var(--sh-lg);
+}
+.world__svgroom .room-shell {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: 108%;
+  height: 108%;
+  transform: translate(-50%, -50%);
+}
+.world__svgchar {
+  position: absolute;
+  left: 47%;
+  top: 56%;
+  width: 15%;
+  transform: translate(-50%, -70%);
+}
+
+/* ---- hotspots ---- */
+.spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  z-index: var(--z-objects);
+  cursor: pointer;
+}
+.spot__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 184, 90, 0);
+  background: radial-gradient(circle, rgba(232, 184, 90, 0) 40%, rgba(232, 184, 90, 0) 70%);
+  transition: background var(--t-med), border-color var(--t-med), box-shadow var(--t-med);
+}
+.spot:hover .spot__ring,
+.spot:focus-visible .spot__ring {
+  border-color: rgba(232, 184, 90, 0.7);
+  background: radial-gradient(circle, rgba(232, 184, 90, 0.28) 20%, transparent 70%);
+  box-shadow: 0 0 24px rgba(232, 184, 90, 0.4);
+}
+.spot:not(.spot--egg)::after {
+  /* gentle idle pulse dot so objects read as interactive */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--c-gold);
+  box-shadow: 0 0 12px rgba(232, 184, 90, 0.8);
+  opacity: 0.75;
+  animation: spot-pulse 2.6s ease-in-out infinite;
+}
+@keyframes spot-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+.spot:hover::after,
+.spot:focus-visible::after {
+  opacity: 0;
+}
+
+/* fallback sprite shown inside the hotspot when there is no backdrop image */
+.spot__sprite {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 150%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.spot__sprite svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.world__svgroom ~ .spot::after,
+.world__diorama:has(.world__svgroom) .spot::after {
+  display: none; /* sprites carry their own affordance in fallback mode */
+}
+
+/* ---- callout labels ---- */
+.spot__label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: var(--font-hand);
+  font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--c-cream);
+  background: rgba(10, 16, 30, 0.78);
+  border: 1px solid var(--hairline);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-med), transform var(--t-med);
+  transform: translate(-50%, -50%);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+.spot--show .spot__label,
+.spot:hover .spot__label,
+.spot:focus-visible .spot__label {
+  opacity: 1;
+}
+.spot--left .spot__label {
+  transform: translate(-108%, -50%);
+}
+.spot--right .spot__label {
+  transform: translate(8%, -50%);
+}
+.spot--up .spot__label {
+  transform: translate(-50%, -150%);
+}
+.spot--down .spot__label {
+  transform: translate(-50%, 60%);
+}
+
+/* ---- bottom-right signature ---- */
+.world__hbd {
+  position: absolute;
+  right: var(--sp-5);
+  bottom: calc(env(safe-area-inset-bottom, 0) + var(--sp-4));
+  z-index: var(--z-ui);
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 3.4vw, 2rem);
+  color: var(--c-gold-soft);
+  text-shadow: 0 0 18px rgba(232, 184, 90, 0.35);
+}
+
+/* ---- desktop: reserve space for the sidebar ---- */
+@media (min-width: 821px) {
+  .world__diorama-wrap {
+    padding-left: 250px;
+    padding-right: 40px;
+  }
+  .world__terminal {
+    left: 250px;
+  }
+}
+
+/* ---- mobile: sidebar is a bottom bar ---- */
+@media (max-width: 820px) {
+  .world__diorama-wrap {
+    padding: 10px 10px 104px;
+    align-items: start;
+    padding-top: 92px;
+  }
+  .world__diorama {
+    width: min(100%, 64vh);
+  }
+  .world__hbd {
+    bottom: calc(env(safe-area-inset-bottom, 0) + 86px);
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot::after {
+    animation: none;
+  }
+}
+
+/* ===================================================================
+   IMAGE MODE — the reference render is used directly as the screen.
+   The image carries all its own chrome (menu, title, terminal, labels,
+   signature); we only overlay transparent, interactive hit areas.
+   =================================================================== */
+.world--image .world__diorama-wrap {
+  padding: 0;
+  place-items: center;
+}
+.world--image .world__diorama {
+  width: min(100vw, 100vh);
+  height: min(100vw, 100vh);
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+  overflow: visible;
+}
+.world__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* transparent clickable regions */
+.menuhit,
+.objhit {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: var(--z-objects);
+  -webkit-tap-highlight-color: transparent;
+}
+.menuhit {
+  border-radius: var(--r-pill);
+  transition: background var(--t-fast), box-shadow var(--t-fast);
+}
+.menuhit:hover,
+.menuhit:focus-visible {
+  background: rgba(232, 184, 90, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(232, 184, 90, 0.4);
+}
+
+.objhit {
+  border-radius: 50%;
+}
+.objhit__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 198, 109, 0) 45%, rgba(255, 198, 109, 0) 70%);
+  box-shadow: 0 0 0 0 rgba(232, 184, 90, 0);
+  transition: background var(--t-med), box-shadow var(--t-med), transform var(--t-med);
+}
+.objhit::after {
+  /* soft idle beacon so objects read as tappable (esp. on touch) */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--c-gold);
+  box-shadow: 0 0 10px 2px rgba(232, 184, 90, 0.5);
+  opacity: 0.4;
+  animation: spot-pulse 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+.objhit:hover .objhit__glow,
+.objhit:focus-visible .objhit__glow {
+  background: radial-gradient(circle, rgba(255, 198, 109, 0.3) 20%, transparent 70%);
+  box-shadow: 0 0 30px 6px rgba(232, 184, 90, 0.45);
+}
+.objhit:hover::after,
+.objhit:focus-visible::after {
+  opacity: 0;
+}
+.objhit--egg::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .objhit::after {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+

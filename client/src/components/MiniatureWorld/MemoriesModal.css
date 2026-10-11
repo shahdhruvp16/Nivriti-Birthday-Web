@@ -1,0 +1,167 @@
+.mem-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-panel);
+  display: grid;
+  place-items: center;
+  padding: var(--sp-4);
+  background: rgba(9, 13, 24, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.mem {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: var(--sp-6);
+  color: var(--c-cream);
+  background: rgba(17, 24, 39, 0.96);
+  border: 1px solid rgba(232, 184, 90, 0.3);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+  -webkit-overflow-scrolling: touch;
+}
+
+.mem__x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  color: rgba(247, 240, 229, 0.55);
+  border-radius: 50%;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.mem__x:hover {
+  color: var(--c-cream);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mem__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  color: var(--c-gold);
+  margin-bottom: 6px;
+}
+.mem__title {
+  font-size: var(--fs-2xl);
+  color: var(--c-cream);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-2);
+}
+.mem__sub {
+  font-size: var(--fs-sm);
+  color: var(--c-cream-dim);
+  opacity: 0.75;
+  margin-bottom: var(--sp-6);
+}
+
+.mem__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-5);
+}
+
+.polaroid {
+  background: var(--c-cream);
+  color: var(--c-midnight);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(232, 184, 90, 0.4);
+  box-shadow: var(--sh-md);
+  transform: rotate(var(--tilt));
+  transition: transform var(--t-med) var(--ease-out);
+}
+.polaroid:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+.polaroid__photo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 128px;
+  padding: var(--sp-3);
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e293b, #0f172a 55%, #1e293b);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.polaroid__photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+}
+.polaroid__emoji {
+  position: relative;
+  z-index: 1;
+  font-size: 1.8rem;
+}
+.polaroid__tag {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.polaroid__caption {
+  margin-top: var(--sp-3);
+}
+.polaroid__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #6b7280;
+}
+.polaroid__quote {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: #374151;
+}
+
+.mem__footer {
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+.mem__return {
+  padding: 0.55rem 1.4rem;
+  font-size: var(--fs-sm);
+  color: rgba(247, 240, 229, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--r-md);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+.mem__return:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--c-cream);
+}
+
+@media (max-width: 540px) {
+  .mem {
+    padding: var(--sp-5);
+  }
+  .mem__grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+}

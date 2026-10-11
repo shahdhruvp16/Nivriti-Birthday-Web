@@ -1,0 +1,76 @@
+:root {
+  /* ---- Color palette ---- */
+  --c-midnight: #111827;
+  --c-night: #090d18;
+  --c-night-2: #0d1324;
+  --c-gold: #e8b85a;
+  --c-gold-soft: #f0cd86;
+  --c-cream: #f7f0e5;
+  --c-cream-dim: #e9ddc8;
+  --c-blue: #7599d6;
+  --c-blue-soft: #9db8e6;
+  --c-amber: #ffc66d;
+
+  /* Derived / support */
+  --c-ink: #1b2234;
+  --c-paper: #f6eeddff;
+  --c-paper-shadow: #d9ccae;
+  --glass: rgba(247, 240, 229, 0.06);
+  --glass-strong: rgba(247, 240, 229, 0.1);
+  --hairline: rgba(247, 240, 229, 0.14);
+
+  /* ---- Typography ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+  --font-script: 'Dancing Script', 'Great Vibes', cursive;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.6rem;
+  --fs-2xl: 2.2rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: clamp(2.6rem, 10vw, 5rem);
+
+  /* ---- Spacing ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  /* ---- Radii ---- */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --sh-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --sh-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --glow-gold: 0 0 24px rgba(232, 184, 90, 0.45);
+  --glow-blue: 0 0 22px rgba(117, 153, 214, 0.5);
+  --glow-amber: 0 0 30px rgba(255, 198, 109, 0.55);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 180ms;
+  --t-med: 420ms;
+  --t-slow: 900ms;
+
+  /* ---- Depth / layering ---- */
+  --z-scene: 1;
+  --z-objects: 5;
+  --z-ui: 20;
+  --z-panel: 40;
+  --z-overlay: 60;
+}

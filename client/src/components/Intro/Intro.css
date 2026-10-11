@@ -1,0 +1,128 @@
+.intro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 80% at 50% 40%, #121a30 0%, var(--c-night) 70%);
+  overflow: hidden;
+}
+
+.intro__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(80% 60% at 50% 45%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+.intro__inner {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 640px);
+  padding: var(--sp-5);
+  text-align: center;
+}
+
+.intro__terminal {
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 3.4vw, 1rem);
+  color: var(--c-blue-soft);
+  text-align: left;
+  margin: 0 auto;
+  width: fit-content;
+  min-height: 7.5em;
+}
+
+.intro__line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  white-space: pre;
+  margin: 0.15em 0;
+}
+.intro__prompt {
+  color: var(--c-gold);
+  opacity: 0.8;
+}
+
+.intro__cursor {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.05em;
+  margin-left: 1px;
+  background: var(--c-gold);
+  transform: translateY(2px);
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.intro__reveal {
+  margin-top: var(--sp-6);
+}
+
+.intro__name {
+  font-size: var(--fs-4xl);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  padding-left: 0.28em; /* balance tracking */
+  color: var(--c-cream);
+  text-shadow: 0 0 36px rgba(232, 184, 90, 0.35);
+}
+.intro__name-char {
+  display: inline-block;
+}
+
+.intro__meta {
+  margin-top: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.intro__status {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(232, 184, 90, 0.35);
+  border-radius: var(--r-pill);
+}
+.intro__tagline {
+  color: var(--c-cream-dim);
+  font-size: var(--fs-base);
+  max-width: 32ch;
+}
+.intro__enter {
+  margin-top: var(--sp-3);
+}
+
+.intro__skip {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom, 0) + var(--sp-5));
+  right: var(--sp-5);
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--c-cream-dim);
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--r-pill);
+  background: var(--glass);
+  border: 1px solid var(--hairline);
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.intro__skip:hover {
+  color: var(--c-cream);
+  background: var(--glass-strong);
+}

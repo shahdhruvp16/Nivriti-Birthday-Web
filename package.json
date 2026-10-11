@@ -1,0 +1,13 @@
+{
+  "name": "nivriti-birthday-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NIVRITI — A Little World Made for You (monorepo root)",
+  "scripts": {
+    "dev": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "seed": "cd server && npm run seed",
+    "test": "cd server && npm test"
+  }
+}

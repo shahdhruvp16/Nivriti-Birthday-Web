@@ -1,0 +1,257 @@
+.boutique {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, #1c2238 0%, var(--c-night-2) 55%, var(--c-night) 100%);
+  -webkit-overflow-scrolling: touch;
+}
+
+.boutique__room {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(50% 40% at 50% 60%, rgba(255, 198, 109, 0.12), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 58px, rgba(247, 240, 229, 0.03) 58px 60px);
+}
+
+.boutique__header {
+  position: relative;
+  z-index: 2;
+  padding: calc(env(safe-area-inset-top, 0) + var(--sp-5)) var(--sp-5) 0;
+  text-align: center;
+}
+.boutique__back {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-5));
+}
+.boutique__title {
+  margin: var(--sp-7) auto var(--sp-5);
+}
+.boutique__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.boutique__title h1 {
+  font-size: var(--fs-2xl);
+  color: var(--c-cream);
+  margin: var(--sp-2) 0;
+}
+.boutique__title p {
+  color: var(--c-cream-dim);
+  font-size: var(--fs-sm);
+}
+
+.boutique__shelf {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-5) var(--sp-8);
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.frag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 150px;
+  padding: var(--sp-4) var(--sp-3);
+  background: linear-gradient(180deg, var(--glass), transparent);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  transition: border-color var(--t-med), box-shadow var(--t-med), background var(--t-med);
+}
+.frag:hover,
+.frag:focus-visible {
+  border-color: rgba(232, 184, 90, 0.4);
+  box-shadow: var(--sh-md);
+  background: linear-gradient(180deg, var(--glass-strong), transparent);
+}
+.frag__bottle {
+  width: 86px;
+  position: relative;
+}
+.frag__bottle svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
+}
+.frag__plate {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.frag__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--c-gold);
+}
+.frag__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--c-cream);
+}
+
+.frag--signature {
+  width: 172px;
+  background: linear-gradient(180deg, rgba(232, 184, 90, 0.14), transparent);
+  border-color: rgba(232, 184, 90, 0.45);
+  box-shadow: var(--glow-gold);
+}
+.frag--signature .frag__bottle {
+  width: 104px;
+}
+.frag__sparkle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 198, 109, 0.3), transparent 60%);
+  animation: breathe 3.4s ease-in-out infinite;
+  border-radius: var(--r-lg);
+}
+
+/* ---- detail overlay ---- */
+.frag-detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-panel);
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5);
+  background: radial-gradient(80% 80% at 50% 40%, rgba(9, 13, 24, 0.72), rgba(9, 13, 24, 0.92));
+  backdrop-filter: blur(8px);
+}
+.frag-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  width: min(92vw, 460px);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: var(--sp-6) var(--sp-5);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(27, 34, 52, 0.97), rgba(16, 22, 38, 0.98));
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+}
+.frag-detail--signature {
+  border-color: rgba(232, 184, 90, 0.5);
+  box-shadow: var(--sh-lg), var(--glow-gold);
+}
+.frag-detail__visual {
+  position: relative;
+  width: 120px;
+}
+.frag-detail__visual svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.45));
+}
+.frag-detail__num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  color: var(--c-gold);
+}
+.frag-detail__info h2 {
+  font-size: var(--fs-2xl);
+  color: var(--c-cream);
+  margin: var(--sp-1) 0 var(--sp-4);
+}
+.frag-detail__notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+  list-style: none;
+  margin-bottom: var(--sp-4);
+}
+.frag-detail__notes li {
+  font-size: var(--fs-sm);
+  color: var(--c-cream-dim);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill);
+}
+.frag-detail__layers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  text-align: left;
+}
+.frag-detail__layers div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--hairline);
+}
+.frag-detail__layers dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  width: 56px;
+  flex-shrink: 0;
+}
+.frag-detail__layers dd {
+  color: var(--c-cream);
+  font-size: var(--fs-base);
+}
+.frag-detail__desc {
+  color: var(--c-cream-dim);
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  margin-bottom: var(--sp-5);
+}
+
+.frag-detail__sparkles span {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 6px;
+  height: 6px;
+  background: var(--c-amber);
+  border-radius: 50%;
+  box-shadow: var(--glow-amber);
+  animation: sparkle 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.22s);
+}
+@keyframes sparkle {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc((var(--i) - 5) * 14px), -70px) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .frag,
+  .frag--signature {
+    width: 42%;
+  }
+}

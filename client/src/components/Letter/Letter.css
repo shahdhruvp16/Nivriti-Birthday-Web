@@ -1,0 +1,144 @@
+.letter-scene {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-6) var(--sp-4);
+  background: radial-gradient(90% 70% at 50% 20%, #1a2338 0%, var(--c-night-2) 60%, var(--c-night) 100%);
+  perspective: 1200px;
+}
+.letter-scene__back {
+  position: absolute;
+  left: var(--sp-4);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-5));
+  z-index: 3;
+}
+
+/* ---- envelope ---- */
+.letter-env {
+  position: relative;
+  width: 240px;
+  height: 160px;
+  background: none;
+}
+.letter-env__body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f3ead8, #e2d1ad);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-lg);
+}
+.letter-env__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-left: 120px solid transparent;
+  border-right: 120px solid transparent;
+  border-top: 86px solid #e8d7b6;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  z-index: 2;
+}
+.letter-env__seal {
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  color: var(--c-cream);
+  background: radial-gradient(circle at 38% 32%, #c9505f, #8f2b3a);
+  border-radius: 50%;
+  box-shadow: var(--sh-sm);
+  z-index: 3;
+}
+.letter-env__hint {
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--c-cream-dim);
+  white-space: nowrap;
+  animation: hint-pulse 2s ease-in-out infinite;
+}
+@keyframes hint-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---- paper ---- */
+.paper {
+  position: relative;
+  width: min(92vw, 540px);
+  margin: var(--sp-6) auto;
+  padding: clamp(1.6rem, 6vw, 3rem) clamp(1.4rem, 6vw, 3rem);
+  color: var(--c-ink);
+  background: linear-gradient(180deg, #f8f1e3, #f1e7d2);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-lg), inset 0 0 60px rgba(201, 178, 134, 0.25);
+  transform-origin: top center;
+}
+.paper__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--r-md);
+  opacity: 0.5;
+  background-image: radial-gradient(rgba(140, 110, 60, 0.08) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+.paper__salutation {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  margin-bottom: var(--sp-4);
+  color: #3a2c18;
+}
+.paper__para {
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  margin-bottom: var(--sp-3);
+  color: #4a3a24;
+}
+.paper__closing {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  margin-top: var(--sp-4);
+  color: #3a2c18;
+}
+.paper__signoff {
+  margin-top: var(--sp-2);
+  color: #4a3a24;
+}
+.paper__from {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  margin-top: var(--sp-3);
+  color: #8f5a2b;
+}
+.paper__continue {
+  margin-top: var(--sp-6);
+}
+
+/* delicate gold rule under the salutation */
+.paper__salutation::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  margin-top: var(--sp-2);
+  background: linear-gradient(90deg, var(--c-gold), transparent);
+}
