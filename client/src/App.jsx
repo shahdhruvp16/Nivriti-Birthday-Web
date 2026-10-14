@@ -33,9 +33,28 @@ export default function App() {
   const letter = useMemo(() => birthday?.letter, [birthday]);
   const tiramisu = useMemo(() => birthday?.tiramisu, [birthday]);
 
-  // Loading state (brief): show a quiet placeholder only while first paint pends.
+  // Loading state (brief): a quiet, on-brand loader until content is ready.
   if (status === 'loading' && !birthday) {
-    return <div className="app-shell" aria-busy="true" />;
+    return (
+      <div className="app-shell app-loader" aria-busy="true">
+        <div className="app-loader__mark">
+          <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+            <g fill="#e8b85a" className="app-loader__petals">
+              <ellipse cx="32" cy="14" rx="5" ry="10" />
+              <ellipse cx="32" cy="50" rx="5" ry="10" />
+              <ellipse cx="14" cy="32" rx="10" ry="5" />
+              <ellipse cx="50" cy="32" rx="10" ry="5" />
+              <ellipse cx="19" cy="19" rx="5" ry="10" transform="rotate(45 19 19)" />
+              <ellipse cx="45" cy="19" rx="5" ry="10" transform="rotate(-45 45 19)" />
+              <ellipse cx="19" cy="45" rx="5" ry="10" transform="rotate(-45 19 45)" />
+              <ellipse cx="45" cy="45" rx="5" ry="10" transform="rotate(45 45 45)" />
+            </g>
+            <circle cx="32" cy="32" r="11" fill="#5b3a1e" />
+          </svg>
+        </div>
+        <p className="app-loader__text">Preparing a little world…</p>
+      </div>
+    );
   }
 
   return (

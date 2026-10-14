@@ -39,10 +39,10 @@ export default function Letter({ letter, reduced, onContinue, onExit }) {
           {letter.paragraphs.map((p, i) => (
             <motion.p
               key={i}
-              className="paper__para"
+              className={`paper__para${i === 0 ? ' paper__para--lead' : ''}`}
               initial={reduced ? false : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: reduced ? 0 : 0.5 + i * 0.18, duration: 0.6 }}
+              transition={{ delay: reduced ? 0 : 0.5 + i * 0.14, duration: 0.6 }}
             >
               {p}
             </motion.p>
@@ -55,6 +55,15 @@ export default function Letter({ letter, reduced, onContinue, onExit }) {
             {letter.continueLabel || 'Continue exploring'} <span aria-hidden="true">→</span>
           </button>
         </motion.article>
+      )}
+
+      {open && !reduced && (
+        <div className="letter-scroll-cue" aria-hidden="true">
+          <span>read on</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </div>
       )}
     </div>
   );

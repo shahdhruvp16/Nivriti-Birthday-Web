@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import RoomShell from '../MiniatureWorld/RoomShell.jsx';
 import Character from '../Character/Character.jsx';
 import { Starfield, Particles } from '../UI/Atmosphere.jsx';
+import useWorldImage from '../../hooks/useWorldImage.js';
 import './FinalUniverse.css';
 
 export default function FinalUniverse({ final, reduced, onReplay }) {
   const lines = final?.lines ?? [];
   const [step, setStep] = useState(reduced ? lines.length + 1 : 0);
+  const world = useWorldImage();
 
   useEffect(() => {
     if (reduced) return;
@@ -33,13 +35,26 @@ export default function FinalUniverse({ final, reduced, onReplay }) {
       >
         <div className={`final__globe${reduced ? '' : ' final__globe--float'}`}>
           <div className="final__world">
-            <RoomShell />
-            <div className="final__char">
-              <Character reduced={reduced} celebrate={!reduced} />
-            </div>
+            {world.status === 'ready' ? (
+              <img className="final__worldimg" src={world.src} alt="Nivriti's little world" draggable="false" />
+            ) : (
+              <>
+                <RoomShell />
+                <div className="final__char">
+                  <Character reduced={reduced} celebrate={!reduced} />
+                </div>
+              </>
+            )}
           </div>
           <div className="final__glass" aria-hidden="true" />
           <div className="final__glow" aria-hidden="true" />
+          {!reduced && (
+            <div className="final__globe-sparkles" aria-hidden="true">
+              {Array.from({ length: 14 }).map((_, i) => (
+                <span key={i} style={{ '--i': i }} />
+              ))}
+            </div>
+          )}
         </div>
         <div className="final__base" aria-hidden="true" />
       </motion.div>

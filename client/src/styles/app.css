@@ -5,10 +5,38 @@
   inset: 0;
 }
 
+.app-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+}
+.app-loader__mark {
+  animation: loader-spin 3.4s linear infinite;
+  filter: drop-shadow(0 0 16px rgba(232, 184, 90, 0.4));
+}
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.app-loader__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--c-cream-dim);
+  letter-spacing: 0.02em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-loader__mark {
+    animation: none;
+  }
+}
+
 .topbar {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom, 0) + var(--sp-4));
-  left: var(--sp-4);
+  top: calc(env(safe-area-inset-top, 0) + var(--sp-4));
+  right: var(--sp-4);
   z-index: var(--z-ui);
   display: flex;
   gap: var(--sp-2);

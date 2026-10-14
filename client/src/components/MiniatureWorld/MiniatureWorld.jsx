@@ -118,13 +118,22 @@ export default function MiniatureWorld({ birthday, worldObjects, reduced, onOpen
 
   return (
     <div className={`world ${hasImage ? 'world--image' : ''}`}>
-      <Starfield count={hasImage ? 30 : 60} reduced={reduced} />
-      {!hasImage && <Particles count={14} reduced={reduced} />}
+      <Starfield count={hasImage ? 44 : 60} reduced={reduced} />
+      <Particles count={12} reduced={reduced} />
       <div className="world__ambient" aria-hidden="true" />
 
       {/* The app's own chrome is only shown for the illustrated fallback. When a
           backdrop render is present, the image already contains the menu,
-          terminal text, title and labels — so we just make it interactive. */}
+          terminal text, title and labels — so we just make it interactive. On
+          phones we still show a big, tappable bottom nav (the baked menu is tiny
+          at that size); CSS hides it on desktop where the baked menu is used. */}
+      {hasImage && (
+        <>
+          <Sidebar active={exploreAll ? 'explore' : 'home'} onSelect={onNav} />
+          <div className="world__mhint" aria-hidden="true">✨ tap the glowing little things</div>
+        </>
+      )}
+
       {!hasImage && (
         <>
           <Sidebar active={exploreAll ? 'explore' : 'home'} onSelect={onNav} />

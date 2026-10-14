@@ -57,6 +57,45 @@
   height: 150%;
   transform: translate(-50%, -50%);
 }
+.final__worldimg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 118%;
+  height: 118%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+.final__globe-sparkles span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-amber);
+  box-shadow: var(--glow-amber);
+  animation: globe-sparkle 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+@keyframes globe-sparkle {
+  0% {
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 26deg)) translateX(0) scale(0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(calc(var(--i) * 26deg)) translateX(130px) scale(1);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .final__globe-sparkles {
+    display: none;
+  }
+}
 .final__char {
   position: absolute;
   left: 50%;
